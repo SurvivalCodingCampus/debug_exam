@@ -3,17 +3,17 @@ import 'package:intl/intl.dart';
 class YukymController {
 
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  // mm과 MM을 착각함. 수정
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   late String nowTime;
 
   // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
   String getTyA() {
-    List<YukymTimeModel> timeDataOne =
-    _getTimeDataOne(nowDate);
+    List<YukymTimeModel> timeDataOne = _getTimeDataOne(nowDate);
 
     if (timeDataOne.isNotEmpty) {
-      nowTime = timeDataOne.first.ty1;
+      // nowTime = timeDataOne.first.ty1; <====== 존재이유 모를 코드
 
       final month = nowDate.substring(5, 7);
       if (month == '01' || month == '02') {
@@ -29,7 +29,7 @@ class YukymController {
       } else if (month == '11' || month == '12') {
         return '경오6국';
       }
-      return nowTime;
+      return '경오7국'; // 경오 7국
     } else {
       // Handle the case when the list is empty
       return '경오7국';  // Or any other appropriate action
@@ -42,29 +42,29 @@ class YukymController {
     String result = timeDataOne.first.ty12;
 
     final nowTime = DateTime.now();
-    if (nowTime.hour >= 0 || nowTime.hour < 2) {
+    if (nowTime.hour >= 0 && nowTime.hour < 2) {
       return timeDataOne.first.ty1;
-    } else if (nowTime.hour >= 2 || nowTime.hour < 4) { // 2 ~ 4 빠짐
+    } else if (nowTime.hour >= 2 && nowTime.hour < 4) { // 2 ~ 4 빠짐
       return timeDataOne.first.ty2;
-    } else if (nowTime.hour >= 4 || nowTime.hour < 6) {
+    } else if (nowTime.hour >= 4 && nowTime.hour < 6) {
       return timeDataOne.first.ty3;
-    } else if (nowTime.hour >= 6 || nowTime.hour < 8) {
+    } else if (nowTime.hour >= 6 && nowTime.hour < 8) {
       return timeDataOne.first.ty4;
-    } else if (nowTime.hour >= 8 || nowTime.hour < 10) {
+    } else if (nowTime.hour >= 8 && nowTime.hour < 10) {
       return timeDataOne.first.ty5;
-    } else if (nowTime.hour >= 10 || nowTime.hour < 12) {
+    } else if (nowTime.hour >= 10 && nowTime.hour < 12) {
       return timeDataOne.first.ty6;
-    } else if (nowTime.hour >= 12 || nowTime.hour < 14) {
+    } else if (nowTime.hour >= 12 && nowTime.hour < 14) {
       return timeDataOne.first.ty7;
-    } else if (nowTime.hour >= 14 || nowTime.hour < 16){ // 14 ~ 16 빠짐
+    } else if (nowTime.hour >= 14 && nowTime.hour < 16){ // 14 ~ 16 빠짐
       return timeDataOne.first.ty8;
-    } else if (nowTime.hour >= 16 || nowTime.hour < 18) {
+    } else if (nowTime.hour >= 16 && nowTime.hour < 18) {
       return timeDataOne.first.ty9;
-    } else if (nowTime.hour >= 18 || nowTime.hour < 20) {
+    } else if (nowTime.hour >= 18 && nowTime.hour < 20) {
       return timeDataOne.first.ty10;
-    } else if (nowTime.hour >= 20 || nowTime.hour < 22) {
+    } else if (nowTime.hour >= 20 && nowTime.hour < 22) {
       return timeDataOne.first.ty11;
-    } else if (nowTime.hour >= 22 || nowTime.hour < 24) {
+    } else if (nowTime.hour >= 22 && nowTime.hour < 24) {
       return timeDataOne.first.ty12;
     }
 
