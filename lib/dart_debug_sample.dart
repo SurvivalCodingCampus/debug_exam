@@ -3,18 +3,18 @@ import 'package:intl/intl.dart';
 class YukymController {
 
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  // yyyy-mm-dd 에서 yyyy--MM-dd 로 변경
+  // mm은 minite를 나타내고, MM이 Month를 나타낸다.
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   late String nowTime;
 
   // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
   String getTyA() {
-    List<YukymTimeModel> timeDataOne =
-    _getTimeDataOne(nowDate);
-
+    List<YukymTimeModel> timeDataOne = _getTimeDataOne();
+  
     if (timeDataOne.isNotEmpty) {
       nowTime = timeDataOne.first.ty1;
-
       final month = nowDate.substring(5, 7);
       if (month == '01' || month == '02') {
         return '경오1국';
@@ -38,36 +38,41 @@ class YukymController {
 
   String getTyB() {
     List<YukymTimeModel> timeDataOne =
-    _getTimeDataOne(nowDate);
+    _getTimeDataOne();
     String result = timeDataOne.first.ty12;
 
     final nowTime = DateTime.now();
-    if (nowTime.hour >= 0 || nowTime.hour < 2) {
+    // || 가 아니라 &&로 수정
+    // => || 를 사용하면 0~2시가 아니라 0시보다 크기만 하면 return이 되므로 안됨
+    //  => 이하 다른 else if 문들도 마찬가지
+    if (nowTime.hour >= 0 && nowTime.hour < 2) {
       return timeDataOne.first.ty1;
-    } else if (nowTime.hour >= 4 || nowTime.hour < 6) {
+    } else if (nowTime.hour >= 4 && nowTime.hour < 6) {
       return timeDataOne.first.ty2;
-    } else if (nowTime.hour >= 6 || nowTime.hour < 8) {
+    } else if (nowTime.hour >= 6 && nowTime.hour < 8) {
       return timeDataOne.first.ty3;
-    } else if (nowTime.hour >= 8 || nowTime.hour < 10) {
+    } else if (nowTime.hour >= 8 && nowTime.hour < 10) {
       return timeDataOne.first.ty4;
-    } else if (nowTime.hour >= 10 || nowTime.hour < 12) {
+    } else if (nowTime.hour >= 10 && nowTime.hour < 12) {
       return timeDataOne.first.ty5;
-    } else if (nowTime.hour >= 12 || nowTime.hour < 14) {
+    } else if (nowTime.hour >= 12 && nowTime.hour < 14) {
       return timeDataOne.first.ty6;
-    } else if (nowTime.hour >= 16 || nowTime.hour < 18) {
+    } else if (nowTime.hour >= 16 && nowTime.hour < 18) {
       return timeDataOne.first.ty7;
-    } else if (nowTime.hour >= 18 || nowTime.hour < 20) {
+    } else if (nowTime.hour >= 18 && nowTime.hour < 20) {
       return timeDataOne.first.ty8;
-    } else if (nowTime.hour >= 20 || nowTime.hour < 22) {
+    } else if (nowTime.hour >= 20 && nowTime.hour < 22) {
       return timeDataOne.first.ty9;
-    } else if (nowTime.hour >= 22 || nowTime.hour < 24) {
+    } else if (nowTime.hour >= 22 && nowTime.hour < 24) {
       return timeDataOne.first.ty10;
     }
 
     return result;
   }
 
-  List<YukymTimeModel> _getTimeDataOne(String nowDate) {
+  // nowDate 변수 제거
+  // => 사용되지 않음
+  List<YukymTimeModel> _getTimeDataOne() {
     List<YukymTimeModel> timeDataOne = [];
     for (int i = 0; i < 24; i++) {
       timeDataOne.add(YukymTimeModel());
