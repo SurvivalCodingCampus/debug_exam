@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class Calculator {
   static String kyeongOh(DateTime date) {
     int month = date.month;
@@ -45,9 +43,6 @@ class Calculator {
 
 class YukymController {
   final DateTime now = DateTime.now();
-  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-  late String nowTime;
 
   // 1. 자시의 국 : 갑자1국 = getTyOne()의 값
   String getTyA() {
