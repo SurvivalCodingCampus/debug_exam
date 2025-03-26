@@ -71,12 +71,3 @@ class YukymTimeModel {
   String ty11 = '갑자11국';
   String ty12 = '갑자12국';
 }
-
-
-void main() {
-  YukymController controller = YukymController();
-
-  print('현재 날짜: ${controller.nowDate}');
-  print('getTyA 결과: ${controller.getTyA()}');
-  print('getTyB 결과: ${controller.getTyB()}');
-}
