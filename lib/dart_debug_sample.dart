@@ -3,7 +3,8 @@ import 'package:intl/intl.dart';
 class YukymController {
 
   // DateTime.parse(_userData.value!.selectDate)
-  String nowDate = DateFormat('yyyy-mm-dd').format(DateTime.now());
+  String nowDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  // 1번 오류: DateFormat 오입력됨. MM으로 입력해야 월을 나타냄.
 
   late String nowTime;
 
@@ -42,25 +43,26 @@ class YukymController {
     String result = timeDataOne.first.ty12;
 
     final nowTime = DateTime.now();
-    if (nowTime.hour >= 0 || nowTime.hour < 2) {
+    // 2번 오류: 특정 시간대를 나타내기 위해선 or 연산이 아니라 and 연산을 해야함.
+    if (nowTime.hour >= 0 && nowTime.hour < 2) {
       return timeDataOne.first.ty1;
-    } else if (nowTime.hour >= 4 || nowTime.hour < 6) {
+    } else if (nowTime.hour >= 4 && nowTime.hour < 6) {
       return timeDataOne.first.ty2;
-    } else if (nowTime.hour >= 6 || nowTime.hour < 8) {
+    } else if (nowTime.hour >= 6 && nowTime.hour < 8) {
       return timeDataOne.first.ty3;
-    } else if (nowTime.hour >= 8 || nowTime.hour < 10) {
+    } else if (nowTime.hour >= 8 && nowTime.hour < 10) {
       return timeDataOne.first.ty4;
-    } else if (nowTime.hour >= 10 || nowTime.hour < 12) {
+    } else if (nowTime.hour >= 10 && nowTime.hour < 12) {
       return timeDataOne.first.ty5;
-    } else if (nowTime.hour >= 12 || nowTime.hour < 14) {
+    } else if (nowTime.hour >= 12 && nowTime.hour < 14) {
       return timeDataOne.first.ty6;
-    } else if (nowTime.hour >= 16 || nowTime.hour < 18) {
+    } else if (nowTime.hour >= 16 && nowTime.hour < 18) {
       return timeDataOne.first.ty7;
-    } else if (nowTime.hour >= 18 || nowTime.hour < 20) {
+    } else if (nowTime.hour >= 18 && nowTime.hour < 20) {
       return timeDataOne.first.ty8;
-    } else if (nowTime.hour >= 20 || nowTime.hour < 22) {
+    } else if (nowTime.hour >= 20 && nowTime.hour < 22) {
       return timeDataOne.first.ty9;
-    } else if (nowTime.hour >= 22 || nowTime.hour < 24) {
+    } else if (nowTime.hour >= 22 && nowTime.hour < 24) {
       return timeDataOne.first.ty10;
     }
 
